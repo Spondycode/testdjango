@@ -1,15 +1,27 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 env = environ.Env(
-# set casting, default value
-DEBUG=(bool, False))
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 # reading .env file
 environ.Env.read_env()
+
+load_dotenv()
+
+
+EMAIL_BACKEND=os.environ['EMAIL_BACKEND']
+EMAIL_HOST=os.environ['EMAIL_HOST']
+EMAIL_PORT=os.environ['EMAIL_PORT']
+EMAIL_USE_TLS=os.environ['EMAIL_USE_TLS']
+EMAIL_HOST_USER=os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD=os.environ['EMAIL_HOST_PASSWORD']
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -22,6 +34,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'sim.User'
+
 
 # Application definition
 
@@ -32,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "sim",
 ]
 
 MIDDLEWARE = [
